@@ -1,0 +1,30 @@
+<%- include("header") -%>
+
+    <div class="box" id="heading">
+        <h1>
+            <% const date=new Date(); %>
+                <% const options={ weekday: "long" , day: "numeric" , month: "long" }; %>
+                    <%= date.toLocaleDateString("en-US", options) %>
+        </h1>
+    </div>
+
+    <div class="box">
+        <% newListItems.forEach(item=> { %>
+            <div class="item">
+                <form class="deleteForm" action="/delete" method="post">
+                    <input type="hidden" name="itemIndex" value="<%= item._id %>">
+                    <input type="checkbox">
+                    <p>
+                        <%= item.name %>
+                    </p>
+                    <input class="deleteButton" type="submit" value="❌">
+                </form>
+            </div>
+            <% }); %>
+                <form class="item" action="/" method="post">
+                    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                    <button type="submit" name="list">+</button>
+                </form>
+    </div>
+
+    <%- include("footer") -%>
